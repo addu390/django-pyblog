@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+from .search import PostIndex
+from django.contrib.auth.models import User
 
 
 class BaseModel(models.Model):
@@ -11,36 +13,21 @@ class BaseModel(models.Model):
 
 
 class Post(BaseModel):
-    user_id = models.CharField(max_length=255, null=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post', null=True)
     post_id = models.CharField(max_length=255, null=False, default=uuid.uuid4().__str__())
     is_active = models.BooleanField(default=True)
     content = models.TextField(null=True)
     title = models.TextField(null=True)
 
-    class Meta:
-        db_table = "post"
-        indexes = [
-            models.Index(fields=['post_id'], name='post_idx'),
-        ]
-        unique_together = [['post_id', 'is_active']]
+    # Method for indexing the model
+    def indexing(self):
+        obj = PostIndex(
+            meta={'id': self.id},
+            author=self.author.username,
+            created_at=self.created_at,
+            title=self.title,
+            text=self.content
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
 
-    def __str__(self):
-        return self.name
-
-
-class Tag(BaseModel):
-    post_id = models.CharField(max_length=255, null=False)
-    tag_id = models.CharField(max_length=255, null=False, default=uuid.uuid4().__str__())
-    is_active = models.BooleanField(default=True)
-    name = models.CharField(max_length=255, null=False)
-    title = models.TextField(null=True)
-
-    class Meta:
-        db_table = "tags"
-        indexes = [
-            models.Index(fields=['post_id'], name='post_tag_idx'),
-        ]
-        unique_together = [['post_id', 'tag_id']]
-
-    def __str__(self):
-        return self.name
