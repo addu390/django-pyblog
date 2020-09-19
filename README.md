@@ -81,3 +81,5 @@ More details on Django Signals: https://pyblog.xyz/events-using-django-signals/
 [![Blog Home Preview](https://startbootstrap.com/assets/img/screenshots/templates/blog-home.png)](https://startbootstrap.github.io/startbootstrap-blog-home/)
 
 **[View Live Preview](https://startbootstrap.github.io/startbootstrap-blog-home/)**
+
+###### Note: The project is obviously over-engineered, it's meant to give an example on how versatile Django can be 😋 
