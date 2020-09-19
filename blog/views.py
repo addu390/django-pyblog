@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.conf import settings
 from django.views.decorators.cache import cache_page
@@ -24,3 +24,7 @@ def post(request, post_id):
     }
     print(context)
     return render(request, 'post.html', context=context)
+
+
+def home(request):
+    return redirect("/posts")
