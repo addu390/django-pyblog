@@ -1,5 +1,5 @@
 # Django Pyblog `Work In Progress`
-Django blog - ElasticSearch and MySQL 🚀
+Django blog - ElasticSearch + MySQL + Redis 🚀
 
 #### Why?
 - Most of us use wordpress 🥱 for blogs (so do I: https://pyblog.xyz). The search operation in wordpress takes forever, because it's a simple `column like '%<complete input string>%` 🤕
