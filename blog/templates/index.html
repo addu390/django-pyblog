@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Local Library</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2">
+          {% block content %}
+          <h4>PyBlog</h4>
+          <hr>
+          {% for post in posts %}
+          <div class="list">
+              <h3><span class="small">{{ post.title }}</span></h3>
+              <h6><span class="small">{{ post.content }}</span></h6>
+          </div>
+          {% endfor %}
+          {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

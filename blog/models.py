@@ -19,14 +19,22 @@ class Post(BaseModel):
     content = models.TextField(null=True)
     title = models.TextField(null=True)
 
-    # Method for indexing the model
+    class Meta:
+        db_table = "post"
+        indexes = [
+            models.Index(fields=['updated_at'], name='post_created_at_idx'),
+        ]
+        unique_together = [['post_id']]
+
     def indexing(self):
         obj = PostIndex(
             meta={'id': self.id},
             author=self.author.username,
-            created_at=self.created_at,
+            post_id=self.post_id,
+            is_active=self.is_active,
             title=self.title,
-            text=self.content
+            created_at=self.created_at,
+            updated_at=self.updated_at,
         )
         obj.save()
         return obj.to_dict(include_meta=True)

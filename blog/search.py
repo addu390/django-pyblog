@@ -10,10 +10,10 @@ connections.create_connection()
 class PostIndex(Document):
     author = Text()
     post_id = Text()
-    created_at = Date()
     is_active = Boolean()
     title = Text()
-    content = Text()
+    created_at = Date()
+    updated_at = Date()
 
     class Index:
         name = 'post-index'
