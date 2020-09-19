@@ -5,7 +5,7 @@ Django blog - ElasticSearch and MySQL 🚀
 - Most of us use wordpress 🥱 for blogs (so do I: https://pyblog.xyz). The search operation in wordpress takes forever, because it's a simple `column like '%<complete input string>%` 🤕
 - To perform faster search operations on tags, categories and other key-words. While it can be achieved with Relational and other NoSQL data stores, Elastic Search is the best when it comes to `SEARCH` 😎
 
-#### Installation (MacOS)
+#### Installation ElasticSearch (MacOS)
 - Tap the Elastic Homebrew repository: `brew tap elastic/tap`
 - `brew install elastic/tap/elasticsearch-full`
 - `pip install elasticsearch-dsl`
@@ -38,15 +38,35 @@ Expected Response (Similar):
 }
 ```
 
+#### Installation Redis (MacOS)
+- `brew install redis`
+- `brew services start redis` or `redis-server /usr/local/etc/redis.conf`
+- `pip install django-redis`
+
+#### Test Redis Set-up
+- `redis-cli ping`
+
 For details on how to set-up a django project with best practices: https://pyblog.xyz/django-initial-setup/
 
 #### Settings
-- Update ES host and port in `settings.py` 
+- Update ES and Redis - host and port in `settings.py` 
 ```
 ELASTICSEARCH_DSL = {
     'default': {
         'hosts': 'localhost:9200'
     },
+}
+```
+```
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "pyblog"
+    }
 }
 ```
 
