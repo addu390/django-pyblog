@@ -12,6 +12,7 @@ class PostIndex(Document):
     post_id = Text()
     is_active = Boolean()
     title = Text()
+    description = Text()
     created_at = Date()
     updated_at = Date()
 

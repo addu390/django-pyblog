@@ -16,6 +16,7 @@ class Post(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post', null=True)
     post_id = models.CharField(max_length=255, null=False, default=uuid.uuid4().__str__())
     is_active = models.BooleanField(default=True)
+    description = models.TextField(null=True)
     content = models.TextField(null=True)
     title = models.TextField(null=True)
 
@@ -33,6 +34,7 @@ class Post(BaseModel):
             post_id=self.post_id,
             is_active=self.is_active,
             title=self.title,
+            description=self.description,
             created_at=self.created_at,
             updated_at=self.updated_at,
         )
