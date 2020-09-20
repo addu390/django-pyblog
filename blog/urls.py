@@ -5,4 +5,5 @@ urlpatterns = [
     path("", views.home, name="home"),
     path('posts', views.index, name='posts'),
     path('posts/<str:post_id>/', views.post, name='post'),
+    path('search/', views.search, name='search'),
 ]

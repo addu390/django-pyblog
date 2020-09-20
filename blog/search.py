@@ -26,7 +26,7 @@ def bulk_indexing():
     bulk(client=es, actions=(b.indexing() for b in models.Post.objects.all().iterator()))
 
 
-def search(author):
-    s = Search().filter('term', author=author)
+def search_posts(description):
+    s = Search().filter('match', description=description)
     response = s.execute()
     return response
