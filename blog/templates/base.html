@@ -39,7 +39,7 @@
                                 <a class="nav-link" href="#">Services</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -71,28 +71,11 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <ul class="list-unstyled mb-0">
+                                            {% for category in categories %}
                                             <li>
-                                                <a href="#">Web Design</a>
+                                                <a href="/category/?q={{ category.0 }}">{{ category.1 }}</a>
                                             </li>
-                                            <li>
-                                                <a href="#">HTML</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Freebies</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li>
-                                                <a href="#">JavaScript</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">CSS</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Tutorials</a>
-                                            </li>
+                                            {% endfor %}
                                         </ul>
                                     </div>
                                 </div>
@@ -109,7 +92,7 @@
                 </div>
             </div>
 
-            <footer class="py-5 bg-dark">
+            <footer class="py-5 bg-dark fixed-bottom">
                 <div class="container">
                     <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
                 </div>

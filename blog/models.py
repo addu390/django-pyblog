@@ -13,9 +13,17 @@ class BaseModel(models.Model):
 
 
 class Post(BaseModel):
+    categories = (
+        (1, "Web Development"),
+        (2, "Java Programming"),
+        (3, "Python Django"),
+        (4, "Uncategorized"),
+    )
+
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post', null=True)
     post_id = models.CharField(max_length=255, null=False, default=uuid.uuid4().__str__())
     is_active = models.BooleanField(default=True)
+    category = models.IntegerField(choices=categories, default=4)
     description = models.TextField(null=True)
     content = models.TextField(null=True)
     title = models.TextField(null=True)
@@ -34,6 +42,7 @@ class Post(BaseModel):
             post_id=self.post_id,
             is_active=self.is_active,
             title=self.title,
+            category=self.category,
             description=self.description,
             created_at=self.created_at,
             updated_at=self.updated_at,
