@@ -10,13 +10,27 @@ CATEGORIES = {'categories': [list(item) for item in Post.categories]}
 
 
 @cache_page(CACHE_TTL)
-def index(request):
-    # [OFFSET:OFFSET+LIMIT]
-    posts = Post.objects.order_by('-updated_at')[:5]
+def index(request, page_id):
+    limit = 5
+    offset = (limit * page_id) - limit
+    posts = Post.objects.order_by('-updated_at')[offset:offset + limit]
+
+    posts_count = Post.objects.all().count()
+
+    page_details = {'remaining': posts_count - (limit * page_id)}
+    if page_id == 1:
+        page_details['previous'] = 0
+        page_details['next'] = 2
+
+    elif page_id > 1:
+        page_details['previous'] = page_id - 1
+        page_details['next'] = page_id + 1
+
     context = {
-        'posts': posts
+        'posts': posts,
     }
     context.update(CATEGORIES)
+    context.update(page_details)
     return render(request, 'index.html', context=context)
 
 
@@ -63,4 +77,4 @@ def search_category(request):
 
 
 def home(request):
-    return redirect("/posts")
+    return redirect("/posts/1")

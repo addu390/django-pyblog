@@ -28,12 +28,12 @@ def bulk_indexing():
 
 
 def search_match(description):
-    s = Search().filter('match', description=description)
+    s = Search().filter('match', description=description)[:5]
     response = s.execute()
     return response
 
 
 def search_term(category):
-    s = Search().filter('term', category=category)
+    s = Search().filter('term', category=category)[:5]
     response = s.execute()
     return response
