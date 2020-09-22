@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .constants import PAGE_LIMIT
+from .constants import PAGE_LIMIT, POST, POSTS
 from .models import Post
 from django.conf import settings
 from django.views.decorators.cache import cache_page
@@ -18,7 +18,7 @@ def index(request, page_id):
     posts = Post.objects.order_by('-updated_at')[offset:offset + PAGE_LIMIT]
     posts_count = Post.objects.all().count()
     context = {
-        'posts': posts,
+        POSTS: posts,
     }
     context.update(CATEGORIES)
     context.update(get_page_details(page_id, posts_count))
@@ -29,7 +29,7 @@ def index(request, page_id):
 def post(request, post_id):
     post_detail = get_object_or_404(Post, post_id=post_id)
     context = {
-        'post': post_detail
+        POST: post_detail
     }
     context.update(CATEGORIES)
     print(context)
@@ -42,10 +42,10 @@ def contact(request):
 
 
 def search(request):
-    match_id = request.GET.get('q')
+    match_id = request.GET.get('category')
     posts = search_match(match_id)
     context = {
-        'posts': posts
+        POSTS: posts
     }
     context.update(CATEGORIES)
     if posts:
@@ -55,10 +55,10 @@ def search(request):
 
 
 def search_category(request):
-    category_id = request.GET.get('q')
+    category_id = request.GET.get('category')
     posts = search_term(category_id)
     context = {
-        'posts': posts
+        POSTS: posts
     }
     context.update(CATEGORIES)
     if posts:
