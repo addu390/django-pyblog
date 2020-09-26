@@ -42,7 +42,7 @@ def contact(request):
 
 
 def search(request):
-    match_id = request.GET.get('category')
+    match_id = request.GET.get('q')
     posts = search_match(match_id)
     context = {
         POSTS: posts
