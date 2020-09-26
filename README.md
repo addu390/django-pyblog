@@ -1,4 +1,4 @@
-# Django Pyblog `Work In Progress 🚁`
+# Django Pyblog 🚁
 Django blog - ElasticSearch + MySQL + Redis 🚀
 
 #### Why?
