@@ -78,8 +78,6 @@ More details on Django Signals: https://pyblog.xyz/events-using-django-signals/
 #### Template Used
 [Blog Home](https://startbootstrap.com/templates/blog-home/) is a basic blog homepage HTML starter template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
 
-[![Blog Home Preview](https://startbootstrap.com/assets/img/screenshots/templates/blog-home.png)](https://startbootstrap.github.io/startbootstrap-blog-home/)
-
 **[View Live Preview](https://startbootstrap.github.io/startbootstrap-blog-home/)**
 
 ###### Note: The project is obviously over-engineered, it's meant to give an example on how versatile Django can be 😋 
